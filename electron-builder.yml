@@ -1,0 +1,24 @@
+appId: io.github.ibrahimbouillet.diapoengine
+productName: Diapo Engine
+copyright: Copyright © 2026 Ibrahim Bouillet
+directories:
+  output: release
+files:
+  - apps/desktop/main.cjs
+  - apps/desktop/index.html
+  - apps/desktop/assets/icon.ico
+  - apps/desktop/assets/icon.png
+  - package.json
+asar: true
+npmRebuild: false
+win:
+  target:
+    - target: portable
+      arch:
+        - x64
+  icon: apps/desktop/assets/icon.ico
+  requestedExecutionLevel: asInvoker
+artifactName: Diapo-Engine-${version}-Windows-${arch}.${ext}
+portable:
+  requestExecutionLevel: user
+  unpackDirName: false

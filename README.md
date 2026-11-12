@@ -6,9 +6,11 @@ La première présentation expliquera la drépanocytose à une classe de troisi�
 
 ## État du projet
 
-Fondation initiale : contrat TypeScript, navigation entre états, calcul des éléments conservés/entrants/sortants, validation du scénario et tests du noyau. Le scénario pédagogique est en préparation.
+Première application de bureau : fenêtre blanche vide, titre et icône dans l'en-tête natif Windows, commandes système de réduction, agrandissement et fermeture. Le logo est un globule rouge en faucille modélisé et rendu dans Blender, avec fond transparent.
 
-Le rendu 2D/3D, les animations, le logo, les médias et l'application Windows restent à développer. Aucun exécutable n'est encore livré. Les états du premier scénario constituent un squelette de contenu ; ils ne sont pas encore des pages mises en scène.
+Le noyau TypeScript décrit déjà la navigation, les états et les éléments conservés/entrants/sortants. Il reste séparé de cette fenêtre : aucune présentation, animation ou commande pédagogique n'est affichée pour l'instant. Le rendu 2D/3D et la lecture des médias restent à développer.
+
+La distribution vise un `.exe` portable pour **Windows 10/11 x64**, avec son moteur inclus, sans installation ni connexion nécessaire à son fonctionnement. La compatibilité doit être vérifiée sur la machine du collège ; les règles d'exécution de l'établissement restent applicables. Les coins arrondis et les dispositions Snap suivent les capacités et réglages de Windows.
 
 ## Principes
 
@@ -24,5 +26,7 @@ Le rendu 2D/3D, les animations, le logo, les médias et l'application Windows re
 - [Architecture et règles du moteur](docs/ARCHITECTURE.md)
 - [Étapes de développement](docs/ROADMAP.md)
 - [Premier scénario : drépanocytose](presentations/drepanocytose/STORYBOARD.md)
+- [Source du logo Blender](art/logo/build_logo.py)
+- [Vérifications de la première fenêtre](docs/VALIDATION.md)
 
 Le guide d'utilisation sera rédigé à une étape ultérieure.

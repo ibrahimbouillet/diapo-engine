@@ -16,7 +16,9 @@ jobs:
         with:
           node-version: 24
           cache: npm
-      - run: npm ci
+      - run: npm ci --ignore-scripts
       - run: npm run check
       - run: npm test
       - run: npm run validate
+      - run: node --check apps/desktop/main.cjs
+      - run: node --check scripts/check-desktop.cjs

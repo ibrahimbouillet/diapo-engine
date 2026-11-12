@@ -1,0 +1,13 @@
+{
+  "source": "crescent-cell.blend",
+  "generator": "build_logo.py",
+  "renderer": "5.2.3 LTS",
+  "resolution": [
+    1024,
+    1024
+  ],
+  "transparent_icon": "../../apps/desktop/assets/icon.png",
+  "preview": "preview-dark.png",
+  "style": "Red stylized crescent-shaped erythrocyte application mark",
+  "medical_simulation": false
+}

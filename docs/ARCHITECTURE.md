@@ -26,7 +26,7 @@ Les durées du scénario servent à préparer et répéter l'oral. Elles ne déc
 | Scénarios et ressources propres à chaque exposé | `presentations/<identifiant>/` | Premier scénario drépanocytose, textes structurels uniquement. |
 | Validation d'un scénario | `scripts/` | Contrôle du contrat et de la durée prévue. |
 | Rendu 2D/3D et lecture des médias | Futur `packages/renderer/` | À développer. |
-| Fenêtre et distribution Windows | Futur `apps/desktop/` | À développer. |
+| Fenêtre et distribution Windows | `apps/desktop/` et `electron-builder.yml` | Fenêtre native blanche, distribution portable x64. |
 
 Le noyau ne connaît ni les globules rouges, ni Electron, ni Three.js. Un scénario déclare ce qui doit être présent ; le futur rendu crée et anime les objets correspondants.
 
@@ -66,7 +66,9 @@ Les médias devront déclarer une politique de lecture : démarrage, pause, fin 
 
 ## Cible Windows autonome
 
-La piste technique de départ est **Three.js** pour la 3D et **Electron** pour la fenêtre Windows. Electron embarque son moteur Chromium ; les bibliothèques et ressources de la présentation seront incluses à la construction. La cible `portable` d'electron-builder permet une distribution `.exe` sans installation.
+La fenêtre initiale utilise **Electron** et son cadre natif Windows (`frame: true`). L'icône et le titre sont dans l'en-tête du système ; le document affiché est vide et blanc. Le menu applicatif est supprimé. Les commandes de fenêtre sont celles de Windows, y compris les fonctions Snap disponibles sur Windows 11.
+
+Electron embarque son moteur Chromium. La cible `portable` d'electron-builder produit un `.exe` sans installation, incluant ce moteur et les ressources locales. La première cible est Windows 10/11 x64. Three.js reste la piste retenue pour le futur rendu 3D ; il n'est pas encore intégré à l'application.
 
 Objectifs de livraison :
 
@@ -83,7 +85,9 @@ L'autonomie concerne les dépendances de l'application. Le système Windows, les
 
 Les tests du noyau couvrent la validation, les limites de navigation, le retour arrière, l'absence de mutation du scénario et le plan de transition d'éléments partagés. Le premier exposé doit totaliser exactement 720 secondes prévues.
 
-La validation du rendu demandera des captures, une vérification des transitions et des essais de navigation pendant la lecture. La distribution sera ensuite vérifiée sur un compte utilisateur standard sans outils de développement, réseau coupé, puis sur la machine du collège. Aucun de ces essais graphiques ou de distribution n'est encore acquis.
+Le diagnostic de la fenêtre contrôle réellement son document vide et les pixels de la zone de contenu, qui doivent tous être blancs. Ce contrôle ne capture pas l'en-tête système ; l'icône et les commandes natives demandent un essai visuel séparé.
+
+La validation du futur rendu demandera des captures, une vérification des transitions et des essais de navigation pendant la lecture. Les essais sur un compte utilisateur standard sans outils de développement et sur la machine du collège restent nécessaires avant qualification pour l'exposé.
 
 ## Références techniques
 

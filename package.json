@@ -1,6 +1,6 @@
 {
   "name": "diapo-engine",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "private": true,
   "description": "Moteur de présentations codées avec scènes animées et continuité entre les pages.",
   "type": "module",
@@ -10,10 +10,17 @@
   "scripts": {
     "check": "tsc --noEmit",
     "test": "node --test packages/core/tests/*.test.ts",
-    "validate": "node scripts/validate-presentation.ts"
+    "validate": "node scripts/validate-presentation.ts",
+    "dev": "electron .",
+    "package:win": "electron-builder --win portable --x64 --publish never",
+    "check:desktop": "node scripts/check-desktop.cjs"
   },
   "devDependencies": {
     "@types/node": "24.19.2",
+    "electron": "45.3.1",
+    "electron-builder": "26.18.0",
     "typescript": "7.0.2"
-  }
+  },
+  "main": "apps/desktop/main.cjs",
+  "author": "Ibrahim Bouillet"
 }
