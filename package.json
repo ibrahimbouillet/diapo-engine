@@ -1,22 +1,16 @@
 {
-  "name": "diapo-engine",
-  "version": "0.3.0",
+  "name": "drepanocytose",
+  "version": "0.3.1",
   "private": true,
-  "description": "Moteur de présentations codées avec scènes animées et continuité entre les pages.",
+  "description": "Diaporama web sur la drépanocytose.",
   "type": "module",
   "engines": {
     "node": ">=24 <25"
   },
   "scripts": {
-    "check": "tsc --noEmit",
-    "test": "node --test packages/core/tests/*.test.ts apps/web/tests/*.test.js",
-    "validate": "node scripts/validate-presentation.ts",
-    "dev": "node scripts/serve-web.mjs",
-    "build": "node scripts/build-web.mjs"
-  },
-  "devDependencies": {
-    "@types/node": "24.19.2",
-    "typescript": "7.0.2"
+    "check": "node --check app.js && node --check preparation.js && node --check scripts/serve.mjs",
+    "test": "node --test tests/*.test.js",
+    "dev": "node scripts/serve.mjs"
   },
   "author": "Ibrahim Bouillet"
 }

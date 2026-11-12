@@ -1,0 +1,60 @@
+:root {
+  color-scheme: light;
+  --page-background: #000;
+  background: var(--page-background);
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  background: var(--page-background);
+}
+
+[hidden] { display: none !important; }
+
+#loading, #presentation {
+  position: fixed;
+  inset: 0;
+}
+
+#presentation { background: var(--page-background); }
+
+#loading {
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  opacity: 1;
+  transition: opacity 320ms ease;
+}
+
+#loading.is-fading {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.loading-logo {
+  display: block;
+  width: min(40vw, 320px);
+  max-width: calc(100vw - 48px);
+  max-height: calc(100vh - 48px);
+  aspect-ratio: 1;
+  object-fit: contain;
+  user-select: none;
+}
+
+#loading-error {
+  margin: 16px 24px 0;
+  color: #76666b;
+  font: 400 12px/1.4 "Segoe UI", sans-serif;
+  text-align: center;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #loading { transition-duration: 0s; }
+}

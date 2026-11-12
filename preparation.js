@@ -17,6 +17,6 @@ export async function minimumVisibleTime(milliseconds) {
 
 export async function showWhenReady({ preparation, minimumVisible, show }) {
   const [completed] = await Promise.all([preparation, minimumVisible]);
-  show();
+  await show();
   return completed;
 }

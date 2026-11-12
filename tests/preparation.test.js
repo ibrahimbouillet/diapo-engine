@@ -41,3 +41,18 @@ test('preparation failure prevents opening and later allocations', async () => {
   }), /Resource unavailable/);
   assert.deepEqual(calls, ['first']);
 });
+
+test('startup completion waits for the asynchronous page reveal', async () => {
+  const fade = deferred();
+  let completed = false;
+  const completion = showWhenReady({
+    preparation: Promise.resolve(['first']),
+    minimumVisible: Promise.resolve(),
+    show: () => fade.promise,
+  }).then(() => { completed = true; });
+  await new Promise(resolve => setImmediate(resolve));
+  assert.equal(completed, false);
+  fade.resolve();
+  await completion;
+  assert.equal(completed, true);
+});

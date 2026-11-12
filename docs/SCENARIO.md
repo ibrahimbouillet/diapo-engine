@@ -1,6 +1,6 @@
 # La drépanocytose — scénario de travail
 
-Ce document prépare un exposé de SVT de troisième dans une application de présentation à concevoir. Il décrit des intentions pédagogiques et visuelles ; il ne constitue ni une narration finale validée, ni une simulation médicale.
+Ce document prépare le contenu du diaporama web de SVT de troisième. Les scènes ci-dessous restent des intentions pédagogiques et visuelles : elles ne sont pas encore affichées par la page actuelle, qui montre seulement le logo de chargement puis le noir. Ce scénario ne constitue ni une narration finale validée, ni une simulation médicale.
 
 **Fil conducteur :** partir d’un globule rouge de référence, comprendre son rôle, le comparer à une cellule contenant de l’hémoglobine S, puis revenir aux personnes qui vivent avec la drépanocytose.
 

@@ -1,12 +1,11 @@
 """Rebuild the red crescent-cell application icon in Blender.
 
 Run from any working directory with Blender --background --python-exit-code 1
---python art/logo/build_logo.py. Outputs are relative to this source file.
+--python assets/source/build_logo.py. Outputs are relative to this source file.
 The red material and crescent shape are an application mark inspired by sickled
 erythrocytes, not a medical simulation or a direct reconstruction of a specimen.
 """
 from pathlib import Path
-import json
 import math
 
 import bpy
@@ -14,7 +13,7 @@ from mathutils import Vector, noise
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-OUTPUT = ROOT / "apps" / "web" / "assets"
+OUTPUT = ROOT / "assets"
 HERE.mkdir(parents=True, exist_ok=True)
 OUTPUT.mkdir(parents=True, exist_ok=True)
 
@@ -155,23 +154,7 @@ camera_data.ortho_scale = max(max_x - min_x, max_y - min_y) / 0.86
 bpy.context.view_layer.objects.active = cell
 cell.select_set(True)
 scene.render.film_transparent = True
-scene.render.filepath = "//../../apps/web/assets/icon.png"
-bpy.ops.wm.save_as_mainfile(filepath=str(HERE / "crescent-cell.blend"))
+scene.render.filepath = "//../logo.png"
+bpy.context.preferences.filepaths.save_version = 0
+bpy.ops.wm.save_as_mainfile(filepath=str(HERE / "logo.blend"))
 bpy.ops.render.render(write_still=True)
-
-# Keep a genuine studio render alongside the transparent icon.
-scene.render.film_transparent = False
-scene.render.filepath = str(HERE / "preview-dark.png")
-bpy.ops.render.render(write_still=True)
-
-manifest = {
-    "source": "crescent-cell.blend",
-    "generator": "build_logo.py",
-    "renderer": bpy.app.version_string,
-    "resolution": [1024, 1024],
-    "transparent_icon": "../../apps/web/assets/icon.png",
-    "preview": "preview-dark.png",
-    "style": "Red stylized crescent-shaped erythrocyte application mark",
-    "medical_simulation": False,
-}
-(HERE / "render-manifest.json").write_text(json.dumps(manifest, indent=2) + "\n", encoding="utf-8")

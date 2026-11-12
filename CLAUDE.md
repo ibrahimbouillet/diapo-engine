@@ -1,5 +1,5 @@
-# Reprise du projet web
+# Reprise
 
-Lire [AGENTS.md](AGENTS.md), puis [docs/HANDOFF.md](docs/HANDOFF.md) avant de modifier les sources.
+Lire [AGENTS.md](AGENTS.md), puis [docs/REPRISE.md](docs/REPRISE.md).
 
-La version actuelle est une page web HTML/CSS/JavaScript. Les deux objectifs — La drépanocytose et le futur Diapo Engine — sont décrits dans [docs/PROJECTS.md](docs/PROJECTS.md).
+Le travail actuel porte uniquement sur le diaporama web La drépanocytose. Le scénario de l'exposé est dans [docs/SCENARIO.md](docs/SCENARIO.md).
