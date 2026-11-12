@@ -1,6 +1,6 @@
 {
   "name": "drepanocytose",
-  "version": "0.3.1",
+  "version": "0.3.2",
   "private": true,
   "description": "Diaporama web sur la drépanocytose.",
   "type": "module",
@@ -8,7 +8,7 @@
     "node": ">=24 <25"
   },
   "scripts": {
-    "check": "node --check app.js && node --check preparation.js && node --check scripts/serve.mjs",
+    "check": "node --check app.js && node --check navigation.js && node --check preparation.js && node --check scripts/serve.mjs",
     "test": "node --test tests/*.test.js",
     "dev": "node scripts/serve.mjs"
   },

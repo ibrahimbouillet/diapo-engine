@@ -20,7 +20,97 @@ html, body {
   inset: 0;
 }
 
-#presentation { background: var(--page-background); }
+#presentation {
+  background: var(--page-background);
+  outline: none;
+  font-family: "Segoe UI", sans-serif;
+  user-select: none;
+}
+
+.slide {
+  position: absolute;
+  inset: 0;
+}
+
+.slide-title {
+  display: grid;
+  place-items: center;
+  padding: 32px;
+  color: #f5f5f5;
+  background: #000;
+}
+
+.slide-title h1 {
+  margin: 0;
+  font-size: clamp(2.25rem, 7vw, 6rem);
+  font-weight: 600;
+  line-height: 1.12;
+  letter-spacing: -0.045em;
+  text-align: center;
+}
+
+.slide-green { background: #16894b; }
+.slide-red { background: #ce303c; }
+
+.edge-control {
+  position: absolute;
+  z-index: 1;
+  top: 0;
+  bottom: 0;
+  width: min(12%, 120px);
+  display: grid;
+  place-items: center;
+  border: 0;
+  padding: 0;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+}
+
+.previous { left: 0; }
+.next { right: 0; }
+.edge-control svg {
+  width: 28px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+}
+.edge-control:not(:disabled):hover svg,
+.edge-control:focus-visible svg { opacity: 0.75; }
+.edge-control:focus-visible { outline: 2px solid #fff; outline-offset: -8px; }
+.edge-control:disabled { cursor: default; }
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+#fullscreen-message {
+  position: absolute;
+  z-index: 2;
+  left: 24px;
+  right: 24px;
+  bottom: 20px;
+  width: fit-content;
+  max-width: calc(100% - 48px);
+  margin: 0 auto;
+  padding: 12px 18px;
+  border: 1px solid #555;
+  border-radius: 12px;
+  background: #202020;
+  color: #fff;
+  font-size: 14px;
+  line-height: 1.5;
+  text-align: center;
+}
 
 #loading {
   z-index: 1;

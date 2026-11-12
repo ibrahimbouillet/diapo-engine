@@ -11,7 +11,23 @@
     <script src="app.js" type="module"></script>
   </head>
   <body data-screen="loading">
-    <main id="presentation" aria-label="Présentation" hidden></main>
+    <main id="presentation" aria-label="Présentation" tabindex="-1" hidden>
+      <section id="title-page" class="slide slide-title" aria-labelledby="presentation-title">
+        <h1 id="presentation-title">La drépanocytose</h1>
+      </section>
+      <section id="green-page" class="slide slide-green" aria-label="Scène de test verte" hidden></section>
+      <section id="red-page" class="slide slide-red" aria-label="Scène de test rouge" hidden></section>
+      <nav id="slide-navigation" aria-label="Navigation du diaporama" hidden>
+        <button type="button" class="edge-control previous" data-navigation="previous" aria-label="Diapositive précédente">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m15 5-7 7 7 7" /></svg>
+        </button>
+        <button type="button" class="edge-control next" data-navigation="next" aria-label="Diapositive suivante">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="m9 5 7 7-7 7" /></svg>
+        </button>
+      </nav>
+      <p id="page-announcement" class="visually-hidden" aria-live="polite" aria-atomic="true"></p>
+      <p id="fullscreen-message" role="status" hidden></p>
+    </main>
     <section id="loading" role="status" aria-label="Chargement de la présentation">
       <img id="loading-logo" class="loading-logo" src="assets/logo.png" alt="" draggable="false" />
       <p id="loading-error" role="alert" hidden>Chargement impossible</p>

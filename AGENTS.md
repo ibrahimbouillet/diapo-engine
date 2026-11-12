@@ -7,13 +7,18 @@
 - Le titre et les métadonnées du diaporama ont pour source `presentation.json`.
 - Conserver la structure simple : fichiers web à la racine, puis `assets/`, `docs/`, `scripts/` et `tests/`.
 - Le chargement nominal montre seulement le grand logo approuvé. Aucun flux de globules, libellé visible ou indicateur supplémentaire n'est demandé.
-- Garder le logo visible au moins 1000 ms et attendre la préparation réelle avant le fondu de 320 ms vers le noir.
+- Garder le logo visible au moins 1000 ms et attendre la préparation réelle avant le fondu de 320 ms vers le titre sur fond noir.
 - Le délai ne prépare pas les ressources à leur place. Ne pas annoncer de modèle, texture ou shader prêt tant que sa préparation n'existe pas réellement.
 - Après le fondu, retirer le contenu du chargement et arrêter ses callbacks et animations.
 - Préserver le logo approuvé, ses proportions et ses sources Blender dans `assets/source/`. Les sources ne sont pas chargées par la page.
+- Après le chargement, afficher seulement le titre issu de `presentation.json`. La démonstration actuelle comporte ensuite une scène verte et une scène rouge, sans modèle 3D.
+- **F** depuis le titre entre en plein écran et démarre la scène verte après réussite ; conserver le plein écran s'il est déjà actif. Dans les scènes, **F** bascule le plein écran sans redémarrer ni changer de scène. Échap doit permettre de quitter le plein écran en conservant la position. Aucun raccourci **S** n'est prévu.
+- L'orateur commande chaque changement : flèches droite/gauche et clic gauche dans les scènes. Le clic dans la bande gauche (12 % de la largeur, au plus 120 px) recule ; les autres clics avancent. Le survol n'avance jamais.
+- Ne pas démarrer par les flèches ou les clics depuis le titre, relancer une scène avec F, boucler après la dernière scène ou programmer un avancement automatique. Reculer depuis la verte revient au titre.
+- Ignorer les répétitions de touches, les combinaisons avec modificateur et les événements provenant d'un contrôle interactif ou d'une saisie. Au démarrage, un refus du plein écran conserve le titre et affiche une courte explication permettant de réessayer ; ne pas démarrer la scène verte silencieusement en fenêtre. Dans une scène, conserver sa position si le plein écran change ou échoue.
 - Intégrer les scènes pédagogiques et la 3D progressivement, selon la demande en cours.
 - Préparer d'abord les ressources utiles au début de l'exposé, puis les suivantes progressivement ; ne pas charger tout l'exposé en 4K par défaut.
 - Utiliser `npm test` et observer la page servie par `npm run dev` après un changement du chargement ou de l'affichage.
-- Vérifier titre/favicon, durée minimale, attente des ressources, fondu, page noire sans défilement et nettoyage.
+- Vérifier titre/favicon, durée minimale, attente des ressources, fondu, titre stable, navigation clavier/souris, limites, plein écran, absence de défilement et nettoyage.
 - La cible du collège est un navigateur sous Windows 10 avec mémoire limitée. Les mesures d'un autre environnement ne le qualifient pas.
 - Écrire la documentation en français et distinguer ce qui fonctionne, ce qui reste à faire et ce qui a réellement été vérifié.

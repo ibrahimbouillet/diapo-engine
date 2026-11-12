@@ -8,7 +8,7 @@ const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 const { values } = parseArgs({ options: { port: { type: 'string', default: '4173' } } });
 const port = Number(values.port);
 if (!Number.isInteger(port) || port < 1 || port > 65535) throw new Error('Invalid port.');
-const allowed = new Set(['index.html', 'styles.css', 'app.js', 'preparation.js', 'presentation.json', 'assets/logo.png', 'assets/favicon.ico']);
+const allowed = new Set(['index.html', 'styles.css', 'app.js', 'preparation.js', 'navigation.js', 'presentation.json', 'assets/logo.png', 'assets/favicon.ico']);
 const mime = {
   '.html': 'text/html; charset=utf-8', '.css': 'text/css; charset=utf-8',
   '.js': 'text/javascript; charset=utf-8', '.json': 'application/json; charset=utf-8',
