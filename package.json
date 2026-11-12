@@ -1,6 +1,6 @@
 {
   "name": "diapo-engine",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "private": true,
   "description": "Moteur de présentations codées avec scènes animées et continuité entre les pages.",
   "type": "module",
@@ -9,7 +9,7 @@
   },
   "scripts": {
     "check": "tsc --noEmit",
-    "test": "node --test packages/core/tests/*.test.ts",
+    "test": "node --test packages/core/tests/*.test.ts apps/desktop/tests/*.test.js",
     "validate": "node scripts/validate-presentation.ts",
     "dev": "electron .",
     "package:win": "electron-builder --win portable --x64 --publish never",

@@ -5,14 +5,17 @@ const path = require('node:path');
 
 const directory = fs.mkdtempSync(path.join(os.tmpdir(), 'diapo-check-'));
 const output = path.join(directory, 'report.json');
-const executable = process.argv[2] || require('electron');
-const args = process.argv[2] ? [] : [path.resolve(__dirname, '..')];
+const parameters = process.argv.slice(2);
+const suppliedExecutable = parameters.find(argument => !argument.startsWith('--'));
+const executable = suppliedExecutable || require('electron');
+const args = suppliedExecutable ? [] : [path.resolve(__dirname, '..')];
 args.push(`--diagnostics-output=${output}`);
+if (parameters.includes('--capture-loading')) args.push('--capture-loading');
 const env = { ...process.env };
 delete env.ELECTRON_RUN_AS_NODE;
 delete env.NODE_OPTIONS;
 delete env.NODE_PATH;
-if (process.argv[2] && process.platform === 'win32') {
+if (suppliedExecutable && process.platform === 'win32') {
   // A packaged app must not find Node, npm or another developer runtime on PATH.
   env.PATH = `${process.env.SystemRoot}\\System32;${process.env.SystemRoot}`;
   args.push(`--user-data-dir=${path.join(directory, 'profile')}`);

@@ -1,4 +1,5 @@
 import type { Page, Presentation } from "../../packages/core/src/index.ts";
+import metadata from "./metadata.json" with { type: "json" };
 
 // Content skeleton: these states are not yet a finished visual presentation.
 // Timings include transitions and are rehearsal targets, never autoplay timers.
@@ -25,11 +26,11 @@ function page(
 
 export const presentation: Presentation = {
   schemaVersion: 1,
-  id: "drepanocytose",
-  title: "La drépanocytose — un voyage au cœur du sang",
+  id: metadata.id,
+  title: metadata.title,
   elements: {
-    "chapter-title": { kind: "text", content: "La drépanocytose" },
-    "key-idea": { kind: "text", content: "Un voyage au cœur du sang" },
+    "chapter-title": { kind: "text", content: metadata.title },
+    "key-idea": { kind: "text", content: metadata.subtitle },
   },
   pages: [
     page("introduction", "Entrer dans le sang", 60, [
