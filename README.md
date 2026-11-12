@@ -1,48 +1,49 @@
 # Diapo Engine et La drépanocytose
 
-Ce dépôt public réunit deux projets liés : **Diapo Engine**, futur logiciel Windows pour créer des présentations avec du code, et **La drépanocytose**, premier diaporama développé avec cette méthode.
+Ce dépôt public réunit deux objectifs : **La drépanocytose**, première présentation à réaliser, et **Diapo Engine**, futur outil de création de diaporamas avancés et programmables.
 
-Aujourd'hui, l'application livrée est dédiée à l'exposé sur la drépanocytose. L'éditeur général de présentations reste à construire. Le noyau réutilisable commence à prendre forme à partir de ce premier cas concret.
+## Version actuelle : une page web
 
-## Application actuelle
+La version 0.3.0 utilise **HTML, CSS et JavaScript dans le navigateur**. La couche Electron, son pont de préchargement et la construction d'exécutables ne font plus partie de cette version. Aucun composant Rust n'est introduit à cette étape.
 
-La fenêtre porte le titre **La drépanocytose**, défini dans les métadonnées de la présentation. Son démarrage comporte deux états :
+Le démarrage conserve deux états :
 
-1. Un écran de chargement blanc avec un petit flux sanguin animé centré et la mention « Chargement… », visible pendant au moins une seconde et jusqu'à la fin de la préparation initiale.
-2. Une page principale entièrement noire et vide, temporaire, affichée une fois ces deux conditions remplies.
+1. Un flux sanguin animé sur fond blanc, avec quatre globules normaux illustrés en CSS, une cellule en faucille issue du rendu Blender et la mention « Chargement… ».
+2. Une page principale entièrement noire et vide, temporaire.
 
-Le titre, le logo et les commandes de fenêtre restent dans l'en-tête natif Windows. Le logo est un globule rouge en faucille, modélisé et rendu dans Blender avec fond transparent.
+L'ouverture attend **au moins une seconde visible et la préparation initiale réussie**. Le chargement prépare actuellement le PNG et les polices ; aucun modèle 3D n'est encore intégré à la page noire. Après ouverture, les callbacks sont arrêtés et le contenu animé est retiré du document.
 
-L'affichage de cette étape utilise HTML et CSS, avec du JavaScript pour le changement d'état. Le chargement associe des globules normaux dessinés en CSS et le rendu PNG Blender du globule en faucille, déplacés dans une petite illustration de vaisseau. Ce mouvement n'est pas une scène 3D calculée en temps réel. Electron fournit la fenêtre Windows et embarque son moteur d'affichage.
+L'onglet porte le titre **La drépanocytose**, à partir des métadonnées de la présentation, et utilise le logo comme favicon. Les commandes de fenêtre sont celles du navigateur : la page n'imite pas une barre Windows.
 
-Le mouvement vise 60 images par seconde, ou au moins 30 sur une machine plus limitée ; les mesures réelles sont à consulter dans la validation. À l'ouverture de la page, les callbacks d'animation sont arrêtés et le contenu du chargement est retiré du document. La lecture des médias et le scénario pédagogique ne sont pas encore intégrés à cette fenêtre.
+## Travailler sur la page
 
-La préparation actuelle vérifie le décodage du PNG d'introduction et la disponibilité des polices. La page noire n'a encore aucune ressource 3D. Les futurs modèles, textures et préparations du rendu devront être ajoutés comme de vraies tâches avant de pouvoir annoncer qu'ils sont prêts ; l'attente d'une seconde seule ne les prépare pas.
+Node 24 et npm servent aux outils de développement et aux tests. Ils ne sont pas chargés dans la page.
 
-La distribution vise un `.exe` portable pour **Windows 10/11 x64**, avec ses ressources incluses et sans installation nécessaire au lancement. Le minimum d'une seconde visible ne comprend pas la préparation du processus et la décompression éventuelle du fichier portable.
+~~~powershell
+npm ci
+npm run dev
+~~~
 
-L'ordinateur du collège étant sous Windows 10 avec une mémoire limitée, la cadence et la mémoire de l'ensemble de l'application doivent être vérifiées sur ce poste. Les mesures du poste de développement ne suffisent pas à le qualifier.
+Le serveur local fournit la page à [http://127.0.0.1:4173](http://127.0.0.1:4173). La construction statique se fait avec `npm run build` et produit `dist/`, qui contient les fichiers web et les ressources nécessaires. L'ouverture par double-clic d'un fichier HTML n'est pas le mode de lancement pris en charge : les modules et les métadonnées sont servis en HTTP.
 
-Les constructions locales sont rangées par version dans `release/<version>/`. Le livrable de cette étape est `release/0.2.0/Drepanocytose-0.2.0-Windows-x64.exe` ; les vérifications effectivement réalisées sont consignées dans la documentation de validation.
+La page n'a ni bibliothèque d'interface ni dépendance à un CDN. Le navigateur existant réalise l'affichage ; aucun moteur Chromium supplémentaire n'est distribué par le projet. Cela ne signifie pas que la page ou les futures scènes 3D ne consomment aucune mémoire.
 
-## Direction du projet
+## Suite du projet
 
-- Des pages vivantes associant textes, images, vidéos, sons et 3D.
-- Des étapes que l'orateur déclenche à son rythme.
-- Des éléments qui restent présents et se transforment entre les pages.
-- Un retour en arrière qui restitue un état défini.
-- À terme, une application Windows de création avec des outils visuels et la possibilité de coder dans les présentations.
+Le premier exposé est prévu pour une classe de troisième : **12 minutes de présentation et jusqu'à 3 minutes de questions**. Son scénario de huit chapitres reste un document de travail, non joué par la page actuelle.
 
-Le premier exposé est prévu pour une classe de troisième : **12 minutes de présentation et jusqu'à 3 minutes de questions**. Son scénario de huit chapitres est un document de travail ; il n'est pas encore joué par l'application.
+Le noyau TypeScript de `packages/core/` est conservé comme contrat et outil de test du futur moteur. Il n'est pas chargé par cette page. Les modèles 3D, les médias, les transitions de présentation et l'éditeur de création restent à développer.
+
+L'intention pour une phase native ultérieure est une application Windows en Rust. Elle n'est pas implémentée maintenant ; les ressources, le rendu et la mémoire devront toujours être mesurés.
 
 ## Documentation
 
 - [Les deux projets et leurs objectifs](docs/PROJECTS.md)
-- [Architecture et fonctionnement actuel](docs/ARCHITECTURE.md)
+- [Architecture actuelle](docs/ARCHITECTURE.md)
 - [Feuille de route](docs/ROADMAP.md)
-- [Reprise du travail par Claude ou une autre IA](docs/HANDOFF.md)
+- [Reprise par Claude ou une autre IA](docs/HANDOFF.md)
 - [Scénario de la drépanocytose](presentations/drepanocytose/STORYBOARD.md)
-- [Source et références du logo](art/logo/ART_NOTES.md)
-- [Vérifications et limites connues](docs/VALIDATION.md)
+- [Logo Blender et références](art/logo/ART_NOTES.md)
+- [Vérifications et limites](docs/VALIDATION.md)
 
-Le guide destiné aux futurs utilisateurs de l'éditeur viendra lorsque ce produit existera.
+Les résultats des anciennes versions Electron sont historiques et ne qualifient pas les performances de cette version web.

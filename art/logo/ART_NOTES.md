@@ -14,7 +14,7 @@ The model uses a curved axis and flattened elliptical cross-sections, with subtl
 - `build_logo.py`: reproducible Blender scene and renders.
 - `crescent-cell.blend`: editable mesh, procedural material, lights and square camera.
 - `preview-dark.png`: actual studio render on a dark teal background.
-- `../../apps/desktop/assets/icon.png`: native transparent-background RGBA render.
+- `../../apps/web/assets/icon.png`: native transparent-background RGBA render.
 - `export_icon.py`: conversion into a multi-resolution Windows ICO.
 - `icon-validation.json`: image dimensions, alpha bounds, icon sizes and output hashes.
 

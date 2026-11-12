@@ -1,5 +1,34 @@
 # Validation des versions
 
+## Version 0.3.0 — page web locale
+
+La version active est désormais la page HTML/CSS/JavaScript sous `apps/web/`, construite dans `dist/`. Les versions Electron décrites plus bas sont historiques ; leurs mesures mémoire ne décrivent pas cette page.
+
+### Vérifications réalisées
+
+- `npm run check`, les 11 tests et la validation du scénario de 720 secondes passent.
+- `npm run build` produit sept fichiers statiques, pour **839 406 octets** au total, dont le PNG et l'ICO approuvés. Aucun runtime Electron, Rust ou bibliothèque cliente externe n'est inclus.
+- Le serveur local répond sur `http://127.0.0.1:4173/`. HTML, JavaScript, CSS, métadonnées et PNG renvoient HTTP 200 avec le type de contenu approprié. Les chemins vers les sources et les répertoires parents testés renvoient 404.
+- Observation dans le navigateur intégré : titre « La drépanocytose », flux sanguin avec « Chargement… », puis page noire vide. Une nouvelle navigation rejoue le démarrage.
+- Après chargement : fond calculé `rgb(0, 0, 0)`, aucun texte visible, aucun enfant dans la zone de présentation, aucun globule restant, zéro animation active.
+- La préparation confirme les tâches réelles `intro-images` et `fonts`. Aucun modèle de scène 3D n'existe encore dans cette page.
+
+### Cadence observée
+
+Le diagnostic web optionnel `?diagnostics` écrit son résumé en console **après** le mouvement. Le contrôle sans capture pendant l'animation a enregistré 1014,1 ms de chargement visible, 60 frames échantillonnées, 60,06 appels RAF/s, un intervalle p95 de 16,8 ms et un maximum de 16,8 ms.
+
+Ces résultats concernent ce navigateur et ce poste, et décrivent les callbacks RAF ; ils ne garantissent pas la cadence physique sur tous les ordinateurs. La capture d'aperçu a été réalisée lors d'une navigation séparée. La consommation mémoire totale d'un onglet navigateur n'a pas été mesurée ici.
+
+### Migration et limites
+
+Les points d'entrée Electron, le preload, le diagnostic de bureau, la configuration d'exécutable et les deux dépendances Electron ont été retirés. Npm a supprimé 281 paquets ; l'audit des cinq paquets de développement restants ne signale aucune vulnérabilité. Le noyau TypeScript est conservé comme contrat hors navigateur et ne fait pas partie des fichiers servis.
+
+La visite de la page utilise un navigateur existant. Node est requis pour le serveur local et les vérifications du développeur, pas pour consulter une future version hébergée sur un serveur statique. Cette version n'est pas annoncée comme un HTML autonome à ouvrir en `file://` : les modules et métadonnées sont servis en HTTP.
+
+Les anciennes constructions peuvent subsister localement sous `release/`, ignoré par Git. Elles n'entrent pas dans le build web et ne servent plus au lancement actuel. Le logo PNG est inchangé ; ses scripts et sa source Blender pointent désormais vers `apps/web/assets/`.
+
+La future 3D, le budget de ressources sur le PC Windows 10 du collège et une éventuelle enveloppe Rust restent à réaliser et à qualifier séparément.
+
 ## Version 0.2.0 — chargement biologique et préparation
 
 Vérifications du 12 novembre 2026 sur Windows 11 Professionnel x64, version 10.0.26300. La cible du collège est Windows 10 x64 ; elle n'a pas encore été testée directement.

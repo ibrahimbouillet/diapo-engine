@@ -6,7 +6,7 @@ import json
 from PIL import Image, ImageDraw
 
 HERE = Path(__file__).resolve().parent
-ASSETS = HERE.parents[1] / "apps" / "desktop" / "assets"
+ASSETS = HERE.parents[1] / "apps" / "web" / "assets"
 png = ASSETS / "icon.png"
 ico = ASSETS / "icon.ico"
 

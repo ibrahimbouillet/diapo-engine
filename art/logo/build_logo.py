@@ -14,7 +14,7 @@ from mathutils import Vector, noise
 
 HERE = Path(__file__).resolve().parent
 ROOT = HERE.parents[1]
-OUTPUT = ROOT / "apps" / "desktop" / "assets"
+OUTPUT = ROOT / "apps" / "web" / "assets"
 HERE.mkdir(parents=True, exist_ok=True)
 OUTPUT.mkdir(parents=True, exist_ok=True)
 
@@ -155,7 +155,7 @@ camera_data.ortho_scale = max(max_x - min_x, max_y - min_y) / 0.86
 bpy.context.view_layer.objects.active = cell
 cell.select_set(True)
 scene.render.film_transparent = True
-scene.render.filepath = "//../../apps/desktop/assets/icon.png"
+scene.render.filepath = "//../../apps/web/assets/icon.png"
 bpy.ops.wm.save_as_mainfile(filepath=str(HERE / "crescent-cell.blend"))
 bpy.ops.render.render(write_still=True)
 
@@ -169,7 +169,7 @@ manifest = {
     "generator": "build_logo.py",
     "renderer": bpy.app.version_string,
     "resolution": [1024, 1024],
-    "transparent_icon": "../../apps/desktop/assets/icon.png",
+    "transparent_icon": "../../apps/web/assets/icon.png",
     "preview": "preview-dark.png",
     "style": "Red stylized crescent-shaped erythrocyte application mark",
     "medical_simulation": False,

@@ -1,10 +1,29 @@
 import { minimumVisibleTime, prepareResources, showWhenReady } from './preparation.js';
 
 const nextFrame = () => new Promise(resolve => requestAnimationFrame(resolve));
+const loadingDurationMs = 1000;
+
+function whenVisible() {
+  if (document.visibilityState === 'visible') return Promise.resolve();
+  return new Promise(resolve => {
+    const onVisibilityChange = () => {
+      if (document.visibilityState !== 'visible') return;
+      document.removeEventListener('visibilitychange', onVisibilityChange);
+      resolve();
+    };
+    document.addEventListener('visibilitychange', onVisibilityChange);
+  });
+}
 
 async function start() {
-  const metadata = await window.presentationHost.whenShown();
+  const response = await fetch(new URL('./presentation.json', import.meta.url));
+  if (!response.ok) throw new Error(`Presentation metadata unavailable (${response.status})`);
+  const metadata = await response.json();
+  if (typeof metadata.title !== 'string' || metadata.title.trim() === '') {
+    throw new Error('Presentation metadata must contain a title');
+  }
   document.title = metadata.title;
+  await whenVisible();
   const introImages = Promise.all([...document.querySelectorAll('#loading img')].map(image => image.decode()));
   await introImages;
   await nextFrame();
@@ -19,7 +38,7 @@ async function start() {
     frameRequest = requestAnimationFrame(recordFrame);
   }
   frameRequest = requestAnimationFrame(recordFrame);
-  const minimumVisible = minimumVisibleTime(metadata.loadingDurationMs);
+  const minimumVisible = minimumVisibleTime(loadingDurationMs);
   performance.mark('preparation-start');
   const preparation = prepareResources([
     { id: 'intro-images', prepare: () => introImages },
@@ -64,6 +83,15 @@ async function start() {
   await nextFrame();
   performance.mark('normal-visible');
   performance.measure('visible-loading', 'loading-visible', 'normal-visible');
+  if (new URLSearchParams(location.search).has('diagnostics')) {
+    console.info('[Diapo startup] ' + JSON.stringify({
+      loadingMs: performance.getEntriesByName('visible-loading')[0].duration,
+      cadence: performance.getEntriesByName('loading-animation')[0].detail,
+      prepared: performance.getEntriesByName('resource-preparation')[0].detail,
+      activeAnimations: document.getAnimations().filter(animation => animation.playState === 'running').length,
+      remainingCells: document.querySelectorAll('.blood-cell').length,
+    }));
+  }
 }
 
 start().catch(error => {
